@@ -18,10 +18,3 @@ class SudokuCell
     end
 
 end
-
-cell_reference.each_index do |index|
-
-  cell_reference[index] = SudokuCell.new(cell_reference[index], value)
-end
-
-end
