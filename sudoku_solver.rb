@@ -7,20 +7,52 @@ require 'highline/import'
 display_menu  # Menu Call
 
 class SudokuCell
-  attr_reader :name, :grid, :test, :row, :row_array, :column, :col_array
-  attr_accessor :value, :possible_values
+  attr_reader :name, :grid, :test, :row, :row_array, :column, :col_array, :grid_arrayx
+  attr_accessor :value, :possible_values, :update, :check_row, :check_column, :check_grid
 
   def initialize(name, value)
     @name = name
     @row = @name[-3].to_i
-    @row_array = $cell_values[@row]
     @column = @name[-2]
-    @col_array = ##$cell_values.transpose[@row]
     @grid = "grid_" + @name[-1]
-    #@grid_array = grid_values($grid_hash[@grid])
     @value = value
     @possible_values = (1..9).to_a
   end
+
+  def update
+    row_array
+    col_array
+    grid_array
+  end
+
+  def row_array
+    $cell_values[row]
+  end
+
+  def check_row
+    row_array.each do |cell|
+      possible_values.delete(cell) if cell.is_a? Fixnum #Is conditional required here?
+    end
+  end
+
+  def col_array
+
+  end
+
+  def check_column
+
+  end
+
+  def grid_array
+    grid_values($grid_hash[@grid])
+  end
+
+  def check_grid
+    grid_array.each do |cell|
+      possible_values.delete(cell) if cell.is_a? Fixnum #Is conditional required here?
+    end
+  end
+
 end
 
 # Create Instance Classes of the SudokuCell Class
@@ -37,36 +69,27 @@ end
     $cell_values << row
   end
 
+  $array_of_keys = $cell_hash.keys
+
 #####################################################################
 # Program Iteration Methods
 
 def refresh_board
   system('clear')
-  display_board($cell_values)
-  puts display_cell_data($cell_hash)
+  $array_of_keys.each { |key| $cell_hash[key].update }
+  display_board
+  display_cell_data($cell_hash)
 end
 
 def iterate_cells_check_values
-
-
-
-end
-
-def check_row(cell_name, row_array)
-
-
-
-end
-
-def check_column(cell_name, col_array)
-
-
-
-end
-
-def check_grid(cell_name, grid_array)
-
-
+  $array_of_keys.each do |key|
+    cell = $cell_hash[key]
+    cell.check_row
+    cell.check_column
+    cell.check_grid
+    cell.update
+  end
+  refresh_board
 
 end
 
@@ -74,7 +97,5 @@ end
 # Program Operation Commands
 
 
-refresh_board
-p $cell_hash["cell01A"].row_array
-p $cell_hash["cell01A"].row
-#p $cell_hash["cell01A"].grid_array
+# refresh_board
+iterate_cells_check_values

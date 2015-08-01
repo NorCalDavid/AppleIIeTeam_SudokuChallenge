@@ -29,12 +29,11 @@ def display_menu
     menu.choice("Hard Board") { say("Come On, We are in Phase 1!"); $board = board($b_hash["board15"]) }
     menu.choice("Exit program.") { say("Thank You Good Bye!"); exit_game }
   end
-
 end
 
-def display_board(array)
+def display_board
   rows = []
-  array.each do |element|
+  $cell_values.each do |element|
     rows << (element)
   end
 
@@ -59,27 +58,29 @@ def display_cell_data(hash)
     counter += 1
   end
   table2 = Terminal::Table.new :headings => ["Cell Name", "Value", "Possible Values", "Cell Name", "Value", "Possible Values", "Cell Name", "Value", "Possible Values"], :rows => rows, :style => {:alignment => :center}
+
+  puts table2
 end
 
 def grid_values(array)
   values = []
-  array.each { |element| values << $cell_hash[cell].value }
+  array.each { |element| values << $cell_hash[element].value }
   values
 end
 
-def array_checker(array)
-  output_array = []
-  array.each do |square|
-    if square.is_a? Fixnum
-      output_array << square
-    end
-  end
-  output_array
-end
+# def array_checker(array)
+#   output_array = []
+#   array.each do |square|
+#     if square.is_a? Fixnum
+#       output_array << square
+#     end
+#   end
+#   output_array
+# end
 
-def possibilities_subtractor(possible_values, array)
-  array.each do |element|
-    possible_values.delete(element) if possible_values.include? element
-  end
-  possible_values
-end
+# def subtractor(possible_values, array)
+#   array.each do |element|
+#     possible_values.delete(element) if possible_values.include? element
+#   end
+#   possible_values
+# end
