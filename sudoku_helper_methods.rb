@@ -27,6 +27,12 @@ def display_board(array)
   puts table
 end
 
+def grid_buddies(array)
+    values = []
+    p array
+    array.each_index { |index| p array[index].value }
+  end
+
 def array_checker(array)
   output_array = []
   array.each do |square|

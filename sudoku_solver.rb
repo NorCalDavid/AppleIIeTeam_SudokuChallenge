@@ -15,23 +15,31 @@ $cell_reference = [["cell00A","cell01A","cell02A","cell03B","cell04B","cell05B",
                    ["cell70G","cell71G","cell72G","cell73H","cell74H","cell75H","cell76I","cell77I","cell78I"],
                    ["cell80G","cell81G","cell82G","cell83H","cell84H","cell85H","cell86I","cell87I","cell88I"]]
 
+# Grid Location Reference
+  $grid_hash = {
+    "grid_A" => [$cell_reference[0][0..2], $cell_reference[1][0..2], $cell_reference[2][0..2]].flatten,
+    "grid_B" => [$cell_reference[0][3..5], $cell_reference[1][3..5], $cell_reference[2][3..5]].flatten,
+    "grid_C" => [$cell_reference[0][6..8], $cell_reference[1][6..8], $cell_reference[2][6..8]].flatten,
+    "grid_D" => [$cell_reference[3][0..2], $cell_reference[4][0..2], $cell_reference[5][0..2]].flatten,
+    "grid_E" => [$cell_reference[3][3..5], $cell_reference[4][3..5], $cell_reference[5][3..5]].flatten,
+    "grid_F" => [$cell_reference[3][6..8], $cell_reference[4][6..8], $cell_reference[5][6..8]].flatten,
+    "grid_G" => [$cell_reference[6][0..2], $cell_reference[7][0..2], $cell_reference[8][0..2]].flatten,
+    "grid_H" => [$cell_reference[6][3..5], $cell_reference[7][3..5], $cell_reference[8][3..5]].flatten,
+    "grid_I" => [$cell_reference[6][6..8], $cell_reference[7][6..8], $cell_reference[8][6..8]].flatten
+  }
+
 class SudokuCell
   attr_reader :name, :grid, :test
   attr_accessor :value, :possible_values
 
   def initialize(name, value)
     @name = name
-    @name
-    #@grid = determine_grid?
+    @row = @name[-3]
+    @col = @name[-2]
+    @grid = $grid_hash["grid_" + @name[-1]]
     @value = value
     @possible_values = (1..9).to_a
-    instance_variable_set(:@test, ("grid_" + @name[-1]))
   end
-
-  private # Private method not available outside class
-    def determine_grid? ## Determine the Grid Location Based off of the Cell Name
-       #grid_hash["grid_" + @name[-1]]
-    end
 
   end
 
@@ -52,30 +60,15 @@ class SudokuCell
     $array_of_values << row.map { |cell| cell.value}
   end
 
-  # Grid Location Reference
-  grid_hash = {
-    "grid_A" => [$cell_reference[0][0..2], $cell_reference[1][0..2], $cell_reference[2][0..2]].flatten,
-    "grid_B" => [$cell_reference[0][3..5], $cell_reference[1][3..5], $cell_reference[2][3..5]].flatten,
-    "grid_C" => [$cell_reference[0][6..8], $cell_reference[1][6..8], $cell_reference[2][6..8]].flatten,
-    "grid_D" => [$cell_reference[3][0..2], $cell_reference[4][0..2], $cell_reference[5][0..2]].flatten,
-    "grid_E" => [$cell_reference[3][3..5], $cell_reference[4][3..5], $cell_reference[5][3..5]].flatten,
-    "grid_F" => [$cell_reference[3][6..8], $cell_reference[4][6..8], $cell_reference[5][6..8]].flatten,
-    "grid_G" => [$cell_reference[6][0..2], $cell_reference[7][0..2], $cell_reference[8][0..2]].flatten,
-    "grid_H" => [$cell_reference[6][3..5], $cell_reference[7][3..5], $cell_reference[8][3..5]].flatten,
-    "grid_I" => [$cell_reference[6][6..8], $cell_reference[7][6..8], $cell_reference[8][6..8]].flatten
-  }
+def check_cells(cell??)
+  column = board.transpose
+end
 
-  def grid_buddies(array)
-    values = []
-    p array
-    array.each_index { |index| p array[index].value }
-  end
+def solve_board
 
-# instance_variable_set("@#{rows_of_class_instances[0][0].grid}", "cornholio")
+end
 
-#p array_checker(rows_of_class_instances[0][0].grid)
-#p rows_of_class_instances[0][0].grid
-#p rows_of_class_instances[0][0].test
+
 
 
 
