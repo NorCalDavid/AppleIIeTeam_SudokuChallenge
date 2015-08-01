@@ -1,7 +1,7 @@
 require_relative 'sudoku_reference_tables'
 
 def board(string)
-  string.split("").map { |value| value == "-" ? nil : value }
+  string.split("").map { |value| value == "-" ? nil : value.to_i }
 end
 
 def exit_game
@@ -10,25 +10,32 @@ end
 
 def display_menu
   system('clear')
+  eb = "Easy Board"
+  mb = "Medium Board"
+  hb = "Hard Board"
+  msg = "Solving Easy Board -"
+  msg2 = "Come On, We are in Phase 1!"
+
   choose do |menu|
     menu.prompt = "Which Sudoku Board Do You Want To Play?  "
-    menu.choice(" Easy Board") { say("Solving Easy Board - 1"); $board = board($b_hash["board1"]) }
-    menu.choice(" Easy Board") { say("Solving Easy Board - 2"); $board = board($b_hash["board2"]) }
-    menu.choice(" Easy Board") { say("Solving Easy Board - 3"); $board = board($b_hash["board3"]) }
-    menu.choice(" Easy Board") { say("Solving Easy Board - 4"); $board = board($b_hash["board4"]) }
-    menu.choice(" Easy Board") { say("Solving Easy Board - 5"); $board = board($b_hash["board5"]) }
-    menu.choice(" Medium Board") { say("Come On, We are in Phase 1!"); $board = board($b_hash["board6"]) }
-    menu.choice(" Medium Board") { say("Come On, We are in Phase 1!"); $board = board($b_hash["board7"]) }
-    menu.choice(" Medium Board") { say("Come On, We are in Phase 1!"); $board = board($b_hash["board8"]) }
-    menu.choice(" Medium Board") { say("Come On, We are in Phase 1!"); $board = board($b_hash["board9"]) }
-    menu.choice("Medium Board") { say("Come On, We are in Phase 1!"); $board = board($b_hash["board10"]) }
-    menu.choice("Hard Board") { say("Come On, We are in Phase 1!"); $board = board($b_hash["board11"]) }
-    menu.choice("Hard Board") { say("Come On, We are in Phase 1!"); $board = board($b_hash["board12"]) }
-    menu.choice("Hard Board") { say("Come On, We are in Phase 1!"); $board = board($b_hash["board13"]) }
-    menu.choice("Hard Board") { say("Come On, We are in Phase 1!"); $board = board($b_hash["board14"]) }
-    menu.choice("Hard Board") { say("Come On, We are in Phase 1!"); $board = board($b_hash["board15"]) }
+    menu.choice(eb) { say(msg + " 1"); $board = board($b_hash["board1"]) }
+    menu.choice(eb) { say(msg + " 2"); $board = board($b_hash["board2"]) }
+    menu.choice(eb) { say(msg + " 3"); $board = board($b_hash["board3"]) }
+    menu.choice(eb) { say(msg + " 4"); $board = board($b_hash["board4"]) }
+    menu.choice(eb) { say(msg + " 5"); $board = board($b_hash["board5"]) }
+    menu.choice(mb) { say(msg2); $board = board($b_hash["board6"]) }
+    menu.choice(mb) { say(msg2); $board = board($b_hash["board7"]) }
+    menu.choice(mb) { say(msg2); $board = board($b_hash["board8"]) }
+    menu.choice(mb) { say(msg2); $board = board($b_hash["board9"]) }
+    menu.choice(mb) { say(msg2); $board = board($b_hash["board10"]) }
+    menu.choice(hb) { say(msg2); $board = board($b_hash["board11"]) }
+    menu.choice(hb) { say(msg2); $board = board($b_hash["board12"]) }
+    menu.choice(hb) { say(msg2); $board = board($b_hash["board13"]) }
+    menu.choice(hb) { say(msg2); $board = board($b_hash["board14"]) }
+    menu.choice(hb) { say(msg2); $board = board($b_hash["board15"]) }
     menu.choice("Exit program.") { say("Thank You Good Bye!"); exit_game }
   end
+
 end
 
 def display_board
@@ -57,7 +64,7 @@ def display_cell_data(hash)
     end
     counter += 1
   end
-  table2 = Terminal::Table.new :headings => ["Cell Name", "Value", "Possible Values", "Cell Name", "Value", "Possible Values", "Cell Name", "Value", "Possible Values"], :rows => rows, :style => {:alignment => :center}
+  table2 = Terminal::Table.new :headings => ["Cell Name", "Value", "Possible Values"] * 3, :rows => rows, :style => {:alignment => :center}
 
   puts table2
 end
