@@ -2,72 +2,79 @@ require_relative 'sudoku_reference_tables'
 require_relative 'sudoku_helper_methods'
 
 require 'terminal-table'
+require 'highline/import'
+
+display_menu  # Menu Call
 
 class SudokuCell
-  attr_reader :name, :grid, :test
+  attr_reader :name, :grid, :test, :row, :row_array, :column, :col_array
   attr_accessor :value, :possible_values
 
   def initialize(name, value)
     @name = name
-    @row = @name[-3]
-    @col = @name[-2]
+    @row = @name[-3].to_i
+    @row_array = $cell_values[@row]
+    @column = @name[-2]
+    @col_array = ##$cell_values.transpose[@row]
     @grid = "grid_" + @name[-1]
+    #@grid_array = grid_values($grid_hash[@grid])
     @value = value
     @possible_values = (1..9).to_a
   end
 end
 
-  $sudoku_game1 = board($board_1)
-
 # Create Instance Classes of the SudokuCell Class
-  $class_instances = []
+  $cell_hash = Hash.new
+  $cell_values = []
 
-  $cell_reference.each_index do |index|
-    row = $cell_reference[index]
-
-    row.each_index do |index2|
-      instance_variable_set("@#{row[index2]}", SudokuCell.new(row[index2], $sudoku_game1[index][index2]))
-      $class_instances << SudokuCell.new(row[index2], $sudoku_game1[index][index2])
-    end
-
+  $cell_ref.each do |row|
+    row.each_index { |index2| $cell_hash[row[index2]] = SudokuCell.new(row[index2], $board.shift) }
   end
 
-  $rows_of_class_instances = []
-  9.times do
-    $rows_of_class_instances << $class_instances.shift(9)
+  $cell_ref.each_index do |i1|
+    row = []
+    $cell_ref.each_index {|i2| row << $cell_hash[$cell_ref[i1][i2]].value }
+    $cell_values << row
   end
 
-  $array_of_values = []
-  $rows_of_class_instances.each do |row|
-    $array_of_values << row.map { |cell| cell.value}
-  end
+#####################################################################
+# Program Iteration Methods
 
-def display_cell_data
-  rows = []
+def refresh_board
+  system('clear')
+  display_board($cell_values)
+  puts display_cell_data($cell_hash)
+end
 
-      $rows_of_class_instances.each do |row|
-        row.each do |cell|
-          rows << [cell.name, cell.value, cell.possible_values]
-        end
-      end
+def iterate_cells_check_values
 
-  table2 = Terminal::Table.new :headings => ["Cell Name", "Value", "Possible Values"], :rows => rows
-  table2
+
+
+end
+
+def check_row(cell_name, row_array)
+
+
+
+end
+
+def check_column(cell_name, col_array)
+
+
+
+end
+
+def check_grid(cell_name, grid_array)
+
+
+
 end
 
 #####################################################################
-#Driver Code
+# Program Operation Commands
 
-puts @cell00A.value
 
-# p rows_of_class_instances[0][0].grid
-display_board($array_of_values)
-puts display_cell_data
-
- # p $grid_hash["grid_A"]
-#p grid_buddies($grid_hash["grid_A"])
-
-# v_array = array_checker(grid_A)
-# possibilities = (1..9).to_a
-# p possibilities_subtractor(possibilities, v_array)
-# display_board($array_of_values)
+refresh_board
+p $cell_hash["cell01A"].row_array
+p $cell_hash["cell01A"].row
+#p $cell_hash["cell01A"].grid_array

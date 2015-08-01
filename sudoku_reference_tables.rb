@@ -1,28 +1,43 @@
+
 # Cell Names
-$cell_reference = [["cell00A","cell01A","cell02A","cell03B","cell04B","cell05B","cell06C","cell07C","cell08C"],
-                   ["cell10A","cell11A","cell12A","cell13B","cell14B","cell15B","cell16C","cell17C","cell18C"],
-                   ["cell20A","cell21A","cell22A","cell23B","cell24B","cell25B","cell26C","cell27C","cell28C"],
+$cell_ref = [["cell00A","cell01A","cell02A","cell03B","cell04B","cell05B","cell06C","cell07C","cell08C"],
+             ["cell10A","cell11A","cell12A","cell13B","cell14B","cell15B","cell16C","cell17C","cell18C"],
+             ["cell20A","cell21A","cell22A","cell23B","cell24B","cell25B","cell26C","cell27C","cell28C"],
 
-                   ["cell30D","cell31D","cell32D","cell33E","cell34E","cell35E","cell36F","cell37F","cell38F"],
-                   ["cell40D","cell41D","cell42D","cell43E","cell44E","cell45E","cell46F","cell47F","cell48F"],
-                   ["cell50D","cell51D","cell52D","cell53E","cell54E","cell55E","cell56F","cell57F","cell58F"],
+             ["cell30D","cell31D","cell32D","cell33E","cell34E","cell35E","cell36F","cell37F","cell38F"],
+             ["cell40D","cell41D","cell42D","cell43E","cell44E","cell45E","cell46F","cell47F","cell48F"],
+             ["cell50D","cell51D","cell52D","cell53E","cell54E","cell55E","cell56F","cell57F","cell58F"],
 
-                   ["cell60G","cell61G","cell62G","cell63H","cell64H","cell65H","cell66I","cell67I","cell68I"],
-                   ["cell70G","cell71G","cell72G","cell73H","cell74H","cell75H","cell76I","cell77I","cell78I"],
-                   ["cell80G","cell81G","cell82G","cell83H","cell84H","cell85H","cell86I","cell87I","cell88I"]]
+             ["cell60G","cell61G","cell62G","cell63H","cell64H","cell65H","cell66I","cell67I","cell68I"],
+             ["cell70G","cell71G","cell72G","cell73H","cell74H","cell75H","cell76I","cell77I","cell78I"],
+             ["cell80G","cell81G","cell82G","cell83H","cell84H","cell85H","cell86I","cell87I","cell88I"]]
 
 # Grid Location Reference
-  $grid_hash = {
-    "grid_A" => [$cell_reference[0][0..2], $cell_reference[1][0..2], $cell_reference[2][0..2]].flatten,
-    "grid_B" => [$cell_reference[0][3..5], $cell_reference[1][3..5], $cell_reference[2][3..5]].flatten,
-    "grid_C" => [$cell_reference[0][6..8], $cell_reference[1][6..8], $cell_reference[2][6..8]].flatten,
-    "grid_D" => [$cell_reference[3][0..2], $cell_reference[4][0..2], $cell_reference[5][0..2]].flatten,
-    "grid_E" => [$cell_reference[3][3..5], $cell_reference[4][3..5], $cell_reference[5][3..5]].flatten,
-    "grid_F" => [$cell_reference[3][6..8], $cell_reference[4][6..8], $cell_reference[5][6..8]].flatten,
-    "grid_G" => [$cell_reference[6][0..2], $cell_reference[7][0..2], $cell_reference[8][0..2]].flatten,
-    "grid_H" => [$cell_reference[6][3..5], $cell_reference[7][3..5], $cell_reference[8][3..5]].flatten,
-    "grid_I" => [$cell_reference[6][6..8], $cell_reference[7][6..8], $cell_reference[8][6..8]].flatten
-  }
+$grid_hash = {  "grid_A" => [$cell_ref[0][0..2], $cell_ref[1][0..2], $cell_ref[2][0..2]].flatten,
+                "grid_B" => [$cell_ref[0][3..5], $cell_ref[1][3..5], $cell_ref[2][3..5]].flatten,
+                "grid_C" => [$cell_ref[0][6..8], $cell_ref[1][6..8], $cell_ref[2][6..8]].flatten,
+                "grid_D" => [$cell_ref[3][0..2], $cell_ref[4][0..2], $cell_ref[5][0..2]].flatten,
+                "grid_E" => [$cell_ref[3][3..5], $cell_ref[4][3..5], $cell_ref[5][3..5]].flatten,
+                "grid_F" => [$cell_ref[3][6..8], $cell_ref[4][6..8], $cell_ref[5][6..8]].flatten,
+                "grid_G" => [$cell_ref[6][0..2], $cell_ref[7][0..2], $cell_ref[8][0..2]].flatten,
+                "grid_H" => [$cell_ref[6][3..5], $cell_ref[7][3..5], $cell_ref[8][3..5]].flatten,
+                "grid_I" => [$cell_ref[6][6..8], $cell_ref[7][6..8], $cell_ref[8][6..8]].flatten
+              }
 
-
-$board_1 = "1-58-2----9--764-52--4--819-19--73-6762-83-9-----61-5---76---3-43--2-5-16--3-89--"
+$b_hash = {
+  "board1"  => "1-58-2----9--764-52--4--819-19--73-6762-83-9-----61-5---76---3-43--2-5-16--3-89--",
+  "board2"  => "--5-3--819-285--6-6----4-5---74-283-34976---5--83--49-15--87--2-9----6---26-495-3",
+  "board3"  => "29-5----77-----4----4738-129-2--3-648---5--7-5---672--3-9--4--5----8-7---87--51-9",
+  "board4"  => "-8--2-----4-5--32--2-3-9-466---9---4---64-5-1134-5-7--36---4--24-723-6-----7--45-",
+  "board5"  => "6-873----2-----46-----6482--8---57-19--618--4-31----8-86-2---39-5----1--1--4562--",
+  "board6"  => "---6891--8------2915------84-3----5-2----5----9-24-8-1-847--91-5------6--6-41----",
+  "board7"  => "-3-5--8-45-42---1---8--9---79-8-61-3-----54---5------78-----7-2---7-46--61-3--5--",
+  "board8"  => "-96-4---11---6---45-481-39---795--43-3--8----4-5-23-18-1-63--59-59-7-83---359---7",
+  "board9"  => "----754----------8-8-19----3----1-6--------34----6817-2-4---6-39------2-53-2-----",
+  "board10" => "3---------5-7-3--8----28-7-7------43-----------39-41-54--3--8--1---4----968---2--",
+  "board11" => "3-26-9--55--73----------9-----94----------1-9----57-6---85----6--------3-19-82-4-",
+  "board12" => "-2-5----48-5--------48-9-2------5-73-9-----6-25-9------3-6-18--------4-71----4-9-",
+  "board13" => "--7--8------2---6-65--79----7----3-5-83---67-2-1----8----71--38-2---5------4--2--",
+  "board14" => "----------2-65-------18--4--9----6-4-3---57-------------------73------9----------",
+  "board15" => "---------------------------------------------------------------------------------"
+}
