@@ -29,7 +29,7 @@ end
 
 def grid_buddies(array)
     values = []
-    p array
+    instance_variable_set("@#{foo}", "cornholio")
     array.each_index { |index| p array[index].value }
   end
 
