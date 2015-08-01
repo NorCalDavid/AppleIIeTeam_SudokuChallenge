@@ -60,13 +60,47 @@ class SudokuCell
     $array_of_values << row.map { |cell| cell.value}
   end
 
-def check_cells(cell??)
-  column = board.transpose
+  $current_game = rows_of_class_instances
+
+def check_cells(cell)
+  check_row(cell)
+  possibilities_subtractor(cell.possible_values, check_row(cell))
+  check_column(cell)
+  possibilities_subtractor(cell.possible_values, check_column(cell))
+  check_grid(cell)
+  possibilities_subtractor(cell.possible_values, check_grid(cell))
+
+end
+
+def check_row(cell) #passed in from rows_of_class_instances[][]
+  $current_game.each do |row|
+    if row.include?(cell)
+      array_checker(row)
+    end
+  end
+end
+
+def check_column(cell)
+  $current_game.transpose.each do |row|
+    if row.include?(cell)
+      array_checker(row)
+    end
+  end
+end
+
+def check_grid(cell)
+  array_checker($grid_hash[cell.grid]) #needs to be fixed
 end
 
 def solve_board
-
+  $current_game.flatten.each do |cell|
+    check_cells(cell)
+    if cell.possible_values.length == 1
+      cell.value = cell.possible_values[0]
+    end
+  end
 end
+
 
 
 
@@ -76,6 +110,13 @@ end
 #Driver Code
 
 display_board($array_of_values)
+
+p ($current_game[0][0]).name
+p ($current_game[0][0]).grid
+p ($current_game[0][0]).value
+p ($current_game[0][0]).possible_values
+p array_checker($current_game[0])
+
 
 # p grid_hash["grid_A"]
 # p grid_buddies(grid_hash["grid_A"])

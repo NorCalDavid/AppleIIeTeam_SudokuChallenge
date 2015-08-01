@@ -36,7 +36,7 @@ def grid_buddies(array)
 def array_checker(array)
   output_array = []
   array.each do |square|
-    if square.is_a? Fixnum
+    if square.respond_to?(value) ##fix this
       output_array << square
     end
   end
